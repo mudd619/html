@@ -35,7 +35,7 @@
     async function getData(){
         div.innerHTML=null;
         let q = document.getElementById("inp").value;
-        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${q}&key=AIzaSyBFv_DWK7fbNpjwlksGesL6tROPzaKsPlc&maxResults=10`)
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${q}&key=AIzaSyBFv_DWK7fbNpjwlksGesL6tROPzaKsPlc&maxResults=20`)
 
         let data = await res.json();
 
