@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #one{
+                width: 200px;
+                height: 200px;
+                border: 1px solid rgb(190, 185, 185);
+                overflow: scroll;
+                margin-left: 42%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center;">Enter any Starwars Character Name</h1>
+        <input id="inp" style="margin-left: 42%;margin-top: 2%;width: 200px;" oninput="throttle()" type="text">
+        <div id="one" style="display: none;"></div>
+    </body>
+</html>
+
+<script>
+    let movie = document.getElementById("one");
+
+    async function input(){
+        movie.innerHTML=null
+        let inp = document.getElementById("inp").value;
+    
+
+        movie.style.display = "block";
+        if(inp==""){ 
+            movie.style.display = "none";
+        }
+
+
+        let res = await fetch(`https://swapi.dev/api/people/?search=${inp}`);
+        let data = await res.json();
+
+        return (data.results);
+    }
+
+
+
+    let flag;
+
+
+
+    function throttle(){
+        if(flag){
+            return false;
+        }
+
+
+        flag = setTimeout(()=>{
+            loop();
+            flag=undefined
+        },2000)
+        
+    }
+
+
+
+    async function loop(){
+        let temp = await input();
+
+        temp.forEach(({name}) => {
+            movie.append(name,document.createElement("br"))
+            //console.log(name)
+        });
+    }
+</script>
